@@ -1,5 +1,6 @@
 const User = require('../model/User');
 const jwt = require('jsonwebtoken');
+const { access } = require('../utils/jwt')
 
 const handleRefreshToken = async (req, res) => {
     const cookies = req.cookies;
@@ -16,16 +17,7 @@ const handleRefreshToken = async (req, res) => {
             const username = decoded.username
             if (err || foundUser.username !== username) return res.sendStatus(403);
             const roles = Object.values(foundUser.roles);
-            const accessToken = jwt.sign(
-                {
-                    "UserInfo": {
-                        "username": username,
-                        "roles": roles
-                    }
-                },
-                process.env.ACCESS_TOKEN_SECRET,
-                { expiresIn: '10s' }
-            );
+            const accessToken = access(username, roles);
             res.json({ username, accessToken })
         }
     );

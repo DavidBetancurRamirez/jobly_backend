@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken');
 const { access, refresh } = require('./jwt')
 
 const login = async (User, res, status) => {
