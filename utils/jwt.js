@@ -9,7 +9,7 @@ const access = (username, roles) => {
             }
         },
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: '10s' }
+        { expiresIn: '10min' }
     );
 
     return accessToken;
