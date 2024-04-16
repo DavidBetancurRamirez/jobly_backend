@@ -18,7 +18,7 @@ const handleRefreshToken = async (req, res) => {
             if (err || foundUser.username !== username) return res.sendStatus(403);
             const roles = Object.values(foundUser.roles);
             const accessToken = access(username, roles);
-            res.json({ username, accessToken })
+            res.json({ username, accessToken, roles })
         }
     );
 }
